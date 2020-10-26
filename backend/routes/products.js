@@ -30,6 +30,7 @@ router.get('/', (req, res, next) => {
   const products = []
 
   db.getDb()
+    .db()
     .collection('products')
     .find() //it returns cursor
     .forEach(productDoc => {
@@ -67,6 +68,7 @@ router.post('', (req, res, next) => {
   /*** CRUD Operation, CREATE ***/
   //Use MongoDB Constant to connect to MongoDB Server
     db.getDb()
+        .db()
         .collection('products')
         .insertOne(newProduct)
         .then(result => {
