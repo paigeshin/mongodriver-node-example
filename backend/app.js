@@ -3,8 +3,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-//Import Mongo Client
-const mongodb = require('mongodb').MongoClient;
+//Import Database Utility
+const db = require('./db');
 
 const productRoutes = require('./routes/products');
 const authRoutes = require('./routes/auth');
@@ -29,6 +29,13 @@ app.use('/products', productRoutes);
 app.use('/', authRoutes);
 
 
+db.initDb((err, db) => {
+    if(err) {
+      console.log(err);
+    } else {
+      app.listen(3100);      
+    }
+});
 
-app.listen(3100);
+
 
